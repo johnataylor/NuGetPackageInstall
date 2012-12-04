@@ -56,11 +56,13 @@ var downloadPackage = function (protocol, host, port, path, userAgent, folder, c
         else {
             if (res.headers['content-disposition']) {
 
-        console.log(res.headers['content-disposition']);
-
                 var filename = res.headers['content-disposition'].replace(/^.*filename=/, '').replace(/^"|$"/g, '');
             }
             else {
+
+                // we must be getting the nupkg from blob storage and there seems to be
+                // no content-disposition header so extra one from the request URI
+
                 var filename = options.path.substr(options.path.lastIndexOf('/') + 1);
             }
 
