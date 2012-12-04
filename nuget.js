@@ -50,11 +50,14 @@ var downloadPackage = function (protocol, host, port, path, userAgent, folder, c
             }
         }
         else if (res.statusCode != 200) {
-            callback({ statusCode: res.statusCode }, null)
+            callback({ protocol: protocol, request: options, statusCode: res.statusCode }, null)
             return;
         }
         else {
             if (res.headers['content-disposition']) {
+
+        console.log(res.headers['content-disposition']);
+
                 var filename = res.headers['content-disposition'].replace(/^.*filename=/, '').replace(/^"|$"/g, '');
             }
             else {

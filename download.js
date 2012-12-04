@@ -47,8 +47,12 @@ var sequential = function (count, callback) {
         console.log('parallel done');
 
         if (err !== null) {
-            console.log('error: ' + JSON.stringify(err));
-            console.log('error: ' + err);
+            console.log('error: ' + err.statusCode);
+
+        var protocol = err.protocol;
+            var options = err.request;
+
+            console.log('calling: ' + options.method + ' ' + protocol + '://' + options.host + options.path);
             callback();
         }
         else {
